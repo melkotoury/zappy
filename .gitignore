@@ -79,3 +79,7 @@ mongod
 *.ntvs*
 *.njsproj
 *.sln
+
+
+# Angular App
+ng-zappy/node_modules
