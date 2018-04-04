@@ -1,3 +1,5 @@
+version: '3.6' # Specify docker compose version
+
 # Define the services/containers to be run
 services:
   angular: # name of the first service
