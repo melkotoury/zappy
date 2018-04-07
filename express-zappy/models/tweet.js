@@ -1,6 +1,6 @@
 const tweetSchema = new mongoose.Schema({
     id: String,
-    text: String,
+    message: String,
     date: Date
 });
 
