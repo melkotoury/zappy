@@ -16,8 +16,10 @@ It is a tool which integrate two topnotch technologies such as Twitter and Slack
 
 3. The project is being splitted in two folders , first one is _express-zappy_ which is the server side code for the app using _node_ and _express_, the second part is the _ng-zappy_ which contains the frontend code using _angular_
 
-4. The app is _dockerized_ , and they way this project works is that we have 3 docker for each part of the app.
+4. Make sure to check the .env.example file as a reference under the express_zappy directory , where it's required to add a new file .env with the same variable as it's use by the app using the doetenv library and don't forget to provide your actual credentials. 
 
-5. Two Docker containers are coming from two docker files are for the express and angular app respectively , and the third docker container is from docker hub image for mongodb
+5. The app is _dockerized_ , and they way this project works is that we have 3 docker for each part of the app.
 
-6. From our project root where _docker compose yml_ file exists directory of our app simply run this command: ```docker-compose up ```. If it doesn't work just try preceiding it with ```sudo``` Express server will be running on port 3000 and Angular on port 4200
+6. Two Docker containers are coming from two docker files are for the express and angular app respectively , and the third docker container is from docker hub image for mongodb
+
+7. From our project root where _docker compose yml_ file exists directory of our app simply run this command: ```docker-compose up ```. If it doesn't work just try preceiding it with ```sudo``` Express server will be running on port 3000 and Angular on port 4200
