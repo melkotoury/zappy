@@ -2,14 +2,11 @@ const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
 const tweetSchema = require('../models/tweet');
+const config= require('../config');
 const Pusher = require('pusher');
-try {
-    require('dotenv').config()
-} catch(e){
-    console.log('\x1b[31m', `Error with your configuration, make sure that you visit the .env file and provide the right values, e: ${e}`)
-}
+
 // MongoDB URL stored in .env and similar to the one in the docker-compose file
-const dbHost = process.env.DB_HOST;
+const dbHost = config.dbHost;
 
 // Connect to mongodb
 mongoose.connect(dbHost);
@@ -21,11 +18,11 @@ const Tweet = mongoose.model('Tweet', tweetSchema);
 // pusher for publish data to the client in real time mode
 
 const pusher = new Pusher({
-    appId: process.env.PUSHER_APP_ID,
-    key: process.env.PUSHER_KEY,
-    secret: process.env.PUSHER_SECRET,
-    cluster: process.env.PUSHER_CLUSTER,
-    encrypted: true
+    appId: config.pusher.appId,
+    key: config.pusher.key,
+    secret: config.pusher.secret,
+    cluster: config.pusher.cluster,
+    encrypted: config.pusher.encrypted
 });
 
 /* GET api listing. */
