@@ -16,7 +16,7 @@ It is a tool which integrate two topnotch technologies such as Twitter and Slack
 
 3. The project is being splitted in two folders , first one is _express-zappy_ which is the server side code for the app using _node_ and _express_, the second part is the _ng-zappy_ which contains the frontend code using _angular_
 
-4. Make sure to check the .env.example file as a reference under the express_zappy directory , where it's required to add a new file .env with the same variable as it's use by the app using the doetenv library and don't forget to provide your actual credentials. 
+4. Make sure to check the .env.example file as a reference under the express_zappy directory , where it's required to add a new file in the express root directory named ```.env``` with the same variable as it's use by the app using the doetenv library and don't forget to provide your actual credentials. 
 
 5. The app is _dockerized_ , and they way this project works is that we have 3 docker for each part of the app.
 
