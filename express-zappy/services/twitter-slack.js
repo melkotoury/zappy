@@ -1,32 +1,27 @@
 module.exports = {
     integrate(){
 
-        //config data
-        try {
-            require('dotenv').config()
-        } catch(e){
-            console.log('\x1b[31m', `Error with your configuration, make sure that you visit the .env file and provide the right values, e: ${e}`)
-        }
-        const slack = {
-            botToken: process.env.SLACK_BOT_TOKEN,
-            marketChannels: process.env.SLACK_MARKET_CHANNELS
-        }
 
+        const {slack , twitter} = require('../config');
 
         let slackCred = slack || {};
+        let twitterCred = twitter || {};
 
         // slack
-        const RtmClient = require('@slack/client').RtmClient;
-        const rtm = new RtmClient(slackCred.botToken);
-        const RTM_EVENTS = require('@slack/client').RTM_EVENTS;
+        const {RTMClient} = require('@slack/client');
+        // The client is initialized and then started to get an active connection to the platform
+        const rtm = new RTMClient(slack.botToken);
+
+
+
 
         // twitter
         const Twitter = require('twitter');
         const client = new Twitter({
-            consumer_key: process.env.TWITTER_CONSUMER_KEY,
-            consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-            access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
-            access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
+            consumer_key: twitterCred.consumer_key,
+            consumer_secret: twitterCred.consumer_secret,
+            access_token_key: twitterCred.access_token_key,
+            access_token_secret: twitterCred.access_token_secret
         });
 
         const _ = require('underscore');
@@ -35,8 +30,6 @@ module.exports = {
         const api = require('./../routes/api.js');
 
         rtm.start();
-
-
         rtm.on(RTM_EVENTS.MESSAGE, function(message) {
             let text = message.text? message.text.replace(/[^a-zA-Z ]/g, ""): ''
             text = text? ` ${text} `:''
