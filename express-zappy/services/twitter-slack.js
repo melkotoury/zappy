@@ -8,10 +8,10 @@ module.exports = {
         let twitterCred = twitter || {};
 
         // slack
-        const {RTMClient} = require('@slack/client');
+        const {RTMClient , WebClient} = require('@slack/client');
         // The client is initialized and then started to get an active connection to the platform
         const rtm = new RTMClient(slack.botToken);
-
+        const web = new WebClient(slack.botToken);
 
 
 
@@ -29,11 +29,39 @@ module.exports = {
         // Get our API
         const api = require('./../routes/api.js');
 
-        rtm.start();
-        rtm.on(RTM_EVENTS.MESSAGE, function(message) {
-            let text = message.text? message.text.replace(/[^a-zA-Z ]/g, ""): ''
+        // rtm.on('message', (event) => {
+        //     let text = event.text? event.text.replace(/[^a-zA-Z ]/g, ""): '';
+        //     text = text? ` ${text} `:'';
+        //
+        //     if(_.contains(slackCred.marketChannels, event.channel) && text && /\sgo\s/i.test(text)){
+        //         // call twitter api for fetching data
+        //         client.get('statuses/user_timeline', {count: 200}, async function(error, tweets, response) {
+        //             let tweetsLen = tweets.length;
+        //             if (!error) {
+        //                 for(let index = 0; index < tweetsLen; index++){
+        //                     let tweet = tweets[index];
+        //                     let twt = await api.findTweet(tweet.id_str);
+        //                     if(!twt){
+        //                         let tweetSaved = await api.saveTweet({id: tweet.id_str, text: tweet.text, date: tweet.created_at});
+        //                         // push tweets to the client after be updated
+        //                         if(tweetSaved && index == tweetsLen - 1){
+        //                             api.pushTweets();
+        //                         }
+        //                     } else {
+        //                         // push tweets to the client after be updated
+        //                         if(index == tweetsLen - 1){
+        //                             api.pushTweets();
+        //                         }
+        //                     }
+        //                 }
+        //             }
+        //         });
+        //     }
+        // });
+        rtm.on('message', (event) => {
+            let text = event.text? event.text.replace(/[^a-zA-Z ]/g, ""): ''
             text = text? ` ${text} `:''
-            if(_.contains(slackCred.marketChannels, message.channel) && text && /\sgo\s/i.test(text)){
+            if(event.text === 'hello') {
                 // call twitter api for fetching data
                 client.get('statuses/user_timeline', {count: 200}, async function(error, tweets, response) {
                     let tweetsLen = tweets.length;
@@ -43,20 +71,44 @@ module.exports = {
                             let twt = await api.findTweet(tweet.id_str);
                             if(!twt){
                                 let tweetSaved = await api.saveTweet({id: tweet.id_str, text: tweet.text, date: tweet.created_at});
+                                // web.chat.postMessage({
+                                //     channel: event.channel,
+                                //     text: tweet.text ,
+                                //     attachments: [
+                                //         {
+                                //             text: 'This is powered by <https://slack.com|Slack>'
+                                //         }
+                                //     ]
+                                // })
                                 // push tweets to the client after be updated
                                 if(tweetSaved && index == tweetsLen - 1){
+
                                     api.pushTweets();
                                 }
                             } else {
                                 // push tweets to the client after be updated
                                 if(index == tweetsLen - 1){
+                                    // web.chat.postMessage({
+                                    //     channel: event.channel,
+                                    //     text: tweet.text ,
+                                    //     attachments: [
+                                    //         {
+                                    //             text: 'This is powered by <https://slack.com|Slack>'
+                                    //         }
+                                    //     ]
+                                    // })
                                     api.pushTweets();
                                 }
                             }
                         }
                     }
                 });
+
             }
         });
+        rtm.start();
+
     }
 }
+
+
