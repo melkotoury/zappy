@@ -15,7 +15,7 @@ mongoose.connect(dbHost);
 // create mongoose models
 const Tweet = mongoose.model('Tweet', tweetSchema);
 
-// pusher for publish data to the client in real time mode
+// pusher is used to publish  data to the client in real time manner
 
 const pusher = new Pusher({
     appId: config.pusher.appId,
@@ -27,7 +27,7 @@ const pusher = new Pusher({
 
 /* GET api listing. */
 router.get('/', (req, res) => {
-    res.send('api works');
+    res.send('Zappy api works');
 });
 
 /* Create a tweet. */
@@ -93,7 +93,7 @@ let saveTweet = (myTweet) => {
     return new Promise ((resolve, reject) => {
         tweet.save(err => {
             if(err){
-                console.log(`Error when save tweet of id(${twt.id}): ${err}`);
+                console.log(`Error when saving tweet of id(${twt.id}): ${err}`);
                 resolve(true)
             }
             resolve(true)

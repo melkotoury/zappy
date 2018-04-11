@@ -29,7 +29,7 @@ export class ApiService {
   }
 
 
-
+  //TODO: let the getAllTweets comes from pusher
 
   getAllTweets(): Observable < Tweets[] > {
     return this

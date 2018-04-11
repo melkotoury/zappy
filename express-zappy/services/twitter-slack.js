@@ -28,7 +28,7 @@ module.exports = {
 
         // Get our API
         const api = require('./../routes/api.js');
-
+        //TODO make slack listen to "go anything"
         rtm.on('message', (event) => {
             let text = event.text? event.text.replace(/[^a-zA-Z ]/g, ""): ''
             text = text? ` ${text} `:''
