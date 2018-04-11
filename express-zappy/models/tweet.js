@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const tweetSchema = new mongoose.Schema({
     id: String,
-    message: String,
+    text: String,
     date: Date
 });
 

@@ -1,5 +1,5 @@
 export interface Tweets {
   id: string,
-  message: string,
+  text: string,
   date: Date
 }

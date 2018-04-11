@@ -1,25 +1,23 @@
 <!-- Bootstrap Navbar -->
 <nav class="navbar navbar-light ">
-  <div class="container">
-    <a class="navbar-brand" href="#">Zappy</a>
-  </div>
+    <div class="container">
+        <a class="navbar-brand" href="#">Zappy</a>
+    </div>
 </nav>
-
 <div class="container">
 
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th>Tweet</th>
-      <th>Date</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let tweet of allTweets">
-      <td>{{tweet.message}}</td>
-      <td>{{tweet.date}}</td>
-    </tr>
-    </tbody>
-  </table>
-
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Tweet</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let tweet of allTweets">
+                <td>{{tweet.text}}</td>
+                <td>{{tweet.date}}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>

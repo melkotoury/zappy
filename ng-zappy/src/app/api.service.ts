@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import {Tweets} from '../../models/tweets';
+import {Tweets} from '../models/tweets';
 
 declare const Pusher: any;
 const API_URL = environment.apiUrl;
@@ -13,17 +13,12 @@ const API_URL = environment.apiUrl;
 export class ApiService {
 
   pusher: any;
-  // Declare empty list of tweets
-
-
-
   tweetsChannel: any;
 
   constructor(private _http: HttpClient) {
     this.pusher = new Pusher(environment.pusher.key,{
       cluster: environment.pusher.cluster,
-      encrypted:environment.pusher.encrypted,
-      apiEndpoint: `${API_URL}/tweets`
+      encrypted:environment.pusher.encrypted
     });
     this.tweetsChannel= this.pusher.subscribe('tweets');
   }
